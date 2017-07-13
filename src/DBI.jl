@@ -1,6 +1,6 @@
-import Compat: @compat, String
-
 module DBI
+
+    import Compat: @compat, String
     using DataArrays
     using DataFrames
 
