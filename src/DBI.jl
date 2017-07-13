@@ -1,4 +1,6 @@
 module DBI
+
+    import Compat: @compat, String
     using DataArrays
     using DataFrames
 
@@ -18,13 +20,13 @@ module DBI
            sql2jltype,
            tableinfo
 
-    if !isdefined(:String)
+    if !isdefined(:AbstractString)
         const AbstractString = Base.String
     end
 
-    abstract DatabaseSystem
-    abstract DatabaseHandle
-    abstract StatementHandle
+    @compat abstract type DatabaseSystem end
+    @compat abstract type DatabaseHandle end
+    @compat abstract type StatementHandle end
 
     immutable DatabaseColumn
         name::String
@@ -41,7 +43,7 @@ module DBI
         columns::Vector{DatabaseColumn}
     end
 
-    function columninfo(db::DatabaseHandle, table::String, column::AbstractString)
+    function columninfo(db::DatabaseHandle, table::AbstractString, column::AbstractString)
         error("DBI API not fully implemented")
     end
 
